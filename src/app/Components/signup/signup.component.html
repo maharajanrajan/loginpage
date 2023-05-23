@@ -1,0 +1,65 @@
+<div class="signup">
+  <div class="container">
+    <div class="card">
+      <div class="text-center">
+        <h1>Sign Up</h1>
+        <h5>Register Your Data!</h5>
+      </div>
+      <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+
+        <div class="mb-3">
+          <label for="fName" class="form-label">Full Name</label>
+          <input type="text" [class.is-invalid]="signupForm.get('fullName')?.invalid && 
+            signupForm.get('fullName')?.touched" formControlName="fullName" class="form-control" id="fName" />
+          <div class="text-danger"
+            *ngIf="signupForm.get('fullName')?.invalid && signupForm.get('fullName')?.touched && signupForm.get('fullName')?.errors">
+            <small *ngIf="signupForm.get('fullName')?.errors?.['required']">
+              Full Name is required
+            </small>
+            <small *ngIf="signupForm.get('fullName')?.errors?.['pattern']">
+              Full Name must be more than 3 letters
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" [class.is-invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+            formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+          <div class="text-danger"
+            *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched && signupForm.get('email')?.errors">
+            <small *ngIf="signupForm.get('email')?.errors?.['required']">
+              Email is required
+            </small>
+            <small *ngIf="signupForm.get('email')?.errors?.['email']">
+              Invalid Email
+            </small>
+          </div>
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password"
+            [class.is-invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+            formControlName="password" class="form-control" id="password">
+          <div class="text-danger"
+            *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched && signupForm.get('password')?.errors">
+            <small *ngIf="signupForm.get('password')?.errors?.['required']">
+              Password is required
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary px-4" [disabled]="signupForm.invalid">Sign Up</button>
+      </form>
+      <div class="text-light mt-2">Already registered?
+        <a class="text-light" routerLink="/Login">Log In</a>
+      </div>
+    </div>
+  </div>
+</div>
